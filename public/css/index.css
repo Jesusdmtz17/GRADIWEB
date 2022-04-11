@@ -2,6 +2,7 @@
     --color-blue: #111e6c;
     --color-red: #ef434e;
     --color-black: #000;
+    --color-grey: #d8d8d8;
     --color-dark-grey: #323232;
     --color-light-grey: #969696;
     --color-white: #ffffff;
@@ -13,16 +14,28 @@
 }
 
 html {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
 
 *, *::before, *::after {
-    box-sizing: inherit;
+    -webkit-box-sizing: inherit;
+            box-sizing: inherit;
+}
+h1,h2,h3 {
+    margin: 0;
 }
 
 a {
     color: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-transition: color 0.5s,background-color 0.5s;
+    -o-transition: color 0.5s,background-color 0.5s;
+    transition: color 0.5s,background-color 0.5s;
 }
 
 body {
@@ -32,10 +45,14 @@ body {
     color: var(--color-light-grey);
     background: var(--color-white);
 }
-
+main {
+    min-height: calc(100vh - 67.5px);
+}
 footer {
     padding: var(--spacing-3);
     text-align: center;
+    background-color: var(--color-black);
+    color: var(--color-white);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -57,8 +74,11 @@ input[type=number] {
 }
 
 .grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     gap: var(--spacing-3);
     --gap: var(--spacing-3);
 }
@@ -81,9 +101,12 @@ input[type=number] {
     }
 }
 
+/* Styles for product images */
 .images-wrapper img {
     display: block;
     width: 100%;
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
     max-width: fit-content;
     margin: auto;
 }
@@ -110,3 +133,231 @@ input[type=number] {
         display: none;
     }
 }
+/* End Styles for product images */
+
+/* Styles for product information */
+.meta-info-product .product-vendor {
+    font-weight: 500;
+}
+.meta-info-product .product-title {
+    font-size: clamp(24px, 3.2vw, 32px);
+    color: var(--color-black);
+    font-weight: 500;
+    line-height: 1.75;
+}
+.meta-info-product .product-price {
+    margin-bottom: var(--spacing-3);   
+}
+.meta-info-product .product-price .normal-price {
+    color: var(--color-black);
+    font-size: clamp(16px, 2.4vw, 24px);
+    margin-right: 10px;
+}
+.meta-info-product .product-price .compare-at-price {
+    text-decoration: line-through;
+    line-height: 1.5;
+}
+.meta-info-product .product-variants {
+    border-top: 1px solid var(--color-grey);
+    margin-bottom: var(--spacing-2);
+}
+.meta-info-product .product-variants .option-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: var(--spacing-3) 0;
+    border-bottom: 1px solid var(--color-grey);
+}
+.meta-info-product .product-variants .option-wrapper label {
+    color: var(--color-dark-grey);
+    width: 60px;
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values {
+    width: calc(100% - 60px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: var(--spacing-4);
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values input {
+    display: none;
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values label {
+    width: 24px;
+    height: 24px;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    outline: 1px solid var(--color-grey);
+    outline-offset: 2px;
+    color: var(--color-grey);
+    font-size: 12px;
+    line-height: 24px;
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values .option-Color label {
+    font-size: 0px;
+    border-radius: 50%;
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values input:checked + label,
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values label:hover {
+    outline: 1px solid var(--color-black);
+    color: var(--color-black);
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values .option-Color label.red {
+    background-color: var(--color-red);
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values .option-Color label.black {
+    background-color: var(--color-black);
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values .option-Color label.white {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-grey)
+}
+.meta-info-product .product-variants .option-wrapper .option-wrapper-values .option-Color label.blue {
+    background-color: var(--color-blue);
+}
+.meta-info-product .qty-container {
+    max-width: 80px;
+    border: 1px solid var(--color-grey);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.meta-info-product .qty-container input {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    outline: none;
+    border: none;
+    pointer-events: none;
+}
+.meta-info-product .qty-container button {
+    width: 25px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+}
+.meta-info-product .product-actions .total-price {
+    color: var(--color-light-grey);
+    text-align: right;
+}
+.meta-info-product .product-actions .total-price span {
+    line-height: 30px;
+}
+.meta-info-product .product-actions .total-price .total {
+    color: var(--color-dark-grey);
+    font-weight: 500;
+    margin-left: 5px;
+}
+.meta-info-product .product-actions .actions {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-3);
+}
+.meta-info-product .product-actions .actions button {
+    width: calc(50% - (var(--spacing-4)/2));
+    padding: var(--spacing-5);
+    font-size: clamp(12px, 1.4vw, 16px);
+    line-height: 2;
+    border-radius: 0px;
+    border: none;
+    background-color: var(--color-grey);
+    color: var(--color-black);
+    border: 1px solid var(--color-grey)
+}
+.meta-info-product .product-actions .actions button:hover{
+    border: 1px solid var(--color-black)
+}
+.meta-info-product .product-actions .actions button.add-to-cart {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-black)
+}
+.meta-info-product .product-actions .actions button.add-to-cart:hover {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+@media screen and (max-width: 768px){
+    .meta-info-product .product-actions .actions button {
+        width: 100%;
+    }
+}
+/* End Styles for product information */
+
+/* Style for Popup Notification */
+.popup-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    display: none;
+  }
+  .popup-notification.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .popup-notification .content-popup {
+    background: var(--color-white);
+    padding: var(--spacing-3);
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+  }
+  .popup-notification .content-popup > .close-popup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  .popup-notification .product-selected {
+    text-align: center;
+  }
+  .popup-notification .product-selected h2 {
+    color: var(--color-black);
+    font-weight: 600;
+    font-size: clamp(16px, 2.4vw, 24px);
+    line-height: 2.6;
+  }
+  .popup-notification .product-information h3 {
+    color: var(--color-light-grey);
+    font-weight: 500;
+    font-size: clamp(14px, 1.8vw, 18px);
+    line-height: 2;
+    margin: var(--spacing-5)
+  }
+  .popup-notification .product-selected .close-popup {
+    background: var(--color-black);
+    border: 1px solid var(--color-black);
+    color: var(--color-white);
+    padding: var(--spacing-5);
+    font-size: clamp(12px, 1.6vw, 16px);
+    width: 100%;
+    max-width: 200px;
+  }
+  .popup-notification .product-selected .close-popup:hover {
+    background: var(--color-grey);
+    border: 1px solid var(--color-black);
+    color: var(--color-black);
+  }
+  /* End Style for Popup Notification */

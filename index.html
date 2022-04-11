@@ -10,57 +10,67 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Flickity Slider CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="./public/css/flickity.min.css">
     <link href="./public/css/index.css" rel="stylesheet">
 
     <!-- Flickity Slider JS -->
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    
+    <script src="./public/js/flickity.pkgd.min.js"></script>
+
     <script src="./public/js/index.js"></script>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="grid">
-            <div class="one-half small--one-whole">
-                <div class="images-wrapper">
-                    <div class="main-images-slider">
+    <main>
+        <div class="wrapper">
+            <div class="grid">
+                <div class="one-half small--one-whole">
+                    <div class="images-wrapper">
+                        <div class="main-images-slider">
 
-                    </div>
-                    <div class="thumbnails-images-carousel">
+                        </div>
+                        <div class="thumbnails-images-carousel">
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="one-half small--one-whole">
-                <div class="meta-info-product">
-                    <div class="product-vendor"></div>
-                    <div class="product-title"></div>
-                    <div class="product-price"></div>
-                    <div class="product-variants"></div>
-                    <div class="product-actions grid">
-                        <div class="qty-selector one-half">
-                            <button class="minus-qty">-</button>
-                            <input type="number" name="qty" value="1">
-                            <button class="plus-qty">+</button>
+                <div class="one-half small--one-whole">
+                    <div class="meta-info-product">
+                        <h3 class="product-vendor"></h3>
+                        <h1 class="product-title"></h1>
+                        <div class="product-price"></div>
+                        <div class="product-variants"></div>
+                        <div class="product-actions grid">
+                            <div class="qty-selector one-half">
+                                <div class="qty-container">
+                                    <button class="minus-qty">-</button>
+                                    <input type="number" name="qty" value="1">
+                                    <button class="plus-qty">+</button>
+                                </div>
+                            </div>
+                            <div class="total-price one-half">
+                                <span>Total Price:</span>
+                                <span class="total"></span>
+                            </div>
+                            <div class="actions">
+                                <button class="add-to-wishlist">Add to favourite</button>
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
                         </div>
-                        <div class="total-price one-half">
-                            <span>Total Price:</span>
-                            <span class="total"></span>
-                        </div>
-                        <div class="actions">
-                            <button class="add-to-wishlist">Add to favourite</button>
-                            <button class="add-to-cart">Add to cart</button>
-                        </div>
-                    </div>
-                    <div class="product-description">
+                        <div class="product-description">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="popup-notification">
+            <div class="content-popup">
+                <button class="close-popup">×</button>
+                <div class="product-content"></div>
+            </div>
+        </div>
+    </main>
     <footer>
-        Desarrollado por <a href="https://www.linkedin.com/in/jesusdavidmartinezcausil/" target="_blank">Jesus Martinez</a>
+        Developed by <a href="https://www.linkedin.com/in/jesusdavidmartinezcausil/" target="_blank">Jesus Martinez</a>
     </footer>
 </body>
 </html>
