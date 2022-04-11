@@ -1,5 +1,9 @@
+/* Developed by JESUS MARTINEZ --> https://www.linkedin.com/in/jesusdavidmartinezcausil/ */
+
+//minified function to compare two arrays.
 Array.prototype.equals&&console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code."),Array.prototype.equals=function(e){if(!e)return!1;if(this.length!=e.length)return!1;for(var r=0,t=this.length;r<t;r++)if(this[r]instanceof Array&&e[r]instanceof Array){if(!this[r].equals(e[r]))return!1}else if(this[r]!=e[r])return!1;return!0},Object.defineProperty(Array.prototype,"equals",{enumerable:!1});
 
+//creation of the object to control the page.
 window.GradiWebApp = window.GradiWebApp || {
     selectors: {
         product_name: '.product-title',
@@ -19,7 +23,7 @@ window.GradiWebApp = window.GradiWebApp || {
         popup_close: '.popup-notification .close-popup'
     },
     initialData_GradiWebApp: function(){
-        //function for get data from json file
+        //function to get data from the api and initialize HTML content.
         let _this = this;
         (async ()=>{ 
             let response = await fetch('https://graditest-store.myshopify.com/products/free-trainer-3-mmw.js');
@@ -37,6 +41,7 @@ window.GradiWebApp = window.GradiWebApp || {
         })();
     },
     writeOptions: function(product){
+        //function to display the product variation options obtained from the api.
         let options = ``;
         product.options.forEach(element => {
             element.values.forEach((option, index)=>{
@@ -58,6 +63,7 @@ window.GradiWebApp = window.GradiWebApp || {
         document.querySelector(this.selectors.product_variants).innerHTML = options;
     },
     getSelectedVariant: function(){
+        //function to obtain the selected product variation.
         let return_variant = false,
         options = [];
         document.querySelectorAll(this.selectors.product_variants_option_wrapper).forEach(element=>{
@@ -73,11 +79,14 @@ window.GradiWebApp = window.GradiWebApp || {
         return return_variant;
     },
     setEventsListeners: function(){
+        //function that initializes each of the events necessary for the operation of the page.
         document.querySelectorAll(this.selectors.product_qty_buttons).forEach(element=>{
+            //function that controls the clicks on the product quantity selectors.
             element.addEventListener('click', event=>{
                 qty = parseFloat(document.querySelector(this.selectors.product_qty_selector).value);
                 if(event.target.classList.contains('minus-qty')){
                     qty -= 1;
+                    //when subtracting from the product quantity the result is less than 1 we leave the input at 1.
                     if(qty<1){
                         qty = 1;
                     }
@@ -91,6 +100,7 @@ window.GradiWebApp = window.GradiWebApp || {
             })
         })
         document.querySelectorAll(this.selectors.form_buttons).forEach(element => {
+            //function that controls the clicks on the action buttons of the form.
             element.addEventListener('click', event=>{
                 let variant = this.getSelectedVariant();
                 let content = `<div class="product-selected">
@@ -108,8 +118,11 @@ window.GradiWebApp = window.GradiWebApp || {
                 })
                 document.querySelector('.popup-notification').classList.add('active');
             })
+            //function to prevent the action of the form, as I don't have a specific path where to send the information I made this setting.
+            document.querySelector('form').addEventListener('submit', event=>{ event.preventDefault();})
         });
         document.querySelectorAll(this.selectors.popup_close).forEach(element => {
+            //function to close popup notification.
             element.addEventListener('click', event=>{
                 event.target.closest('.popup-notification').classList.remove('active');
                 event.target.closest('.popup-notification').querySelector('.product-content').innerHTML = '';
@@ -117,14 +130,17 @@ window.GradiWebApp = window.GradiWebApp || {
         })
     },
     calcPrice: function(variant){
+        //function that calculates the price of a selected variation.
         let price = `<span class="normal-price">${this.formatMoney(variant.price)}</span> ${ variant.compare_at_price > variant.price ? `<span class="compare-at-price">${this.formatMoney(variant.compare_at_price)}</span>`:``}`;
         return price;
     },
     totalPrice: function(qty, variant){
+        //function to calculate the total price based on the selected quantity and the selected variation.
         total = `${ this.formatMoney(qty*variant.price) }`;
         return total;
     },
     formatMoney: function(price){
+        //function to format the price to dollars
         // Create our number formatter.
         var formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -138,6 +154,7 @@ window.GradiWebApp = window.GradiWebApp || {
         return formatter.format(price/100);
     },
     initializeImages: function(images){
+        //function to initialize the product images, get the images from the api and create the carousels for the main images and thumbnails.
         let mainImages = ``, thumbnails = ``;
 
         images.forEach(image =>{
